@@ -1,0 +1,66 @@
+# IAM Roles and Policies
+
+This document outlines the IAM roles and permissions used in the Serverless Social Media Analytics project.
+
+---
+
+## 1. 🔐 Lambda Execution Role
+
+**Role Name:** `lambda-kinesis-s3-execution-role`
+
+**Purpose:**  
+Allows the Lambda function to:
+- Read from Kinesis Data Streams
+- Write to Amazon S3
+- Write logs to CloudWatch
+
+**Required Policy Permissions:**
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:GetRecords",
+        "kinesis:GetShardIterator",
+        "kinesis:DescribeStream",
+        "kinesis:ListStreams"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:PutObjectAcl"
+      ],
+      "Resource": "arn:aws:s3:::your-output-bucket-name/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+2. Quicksight Access
+
+
+{
+  "Effect": "Allow",
+  "Action": [
+    "s3:GetObject",
+    "s3:ListBucket"
+  ],
+  "Resource": [
+    "arn:aws:s3:::your-output-bucket-name",
+    "arn:aws:s3:::your-output-bucket-name/*"
+  ]
+}
