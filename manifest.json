@@ -1,0 +1,13 @@
+{
+    "fileLocations": [
+      {
+        "URIPrefixes": [
+          "s3://bucket-106-data/data/"
+        ]
+      }
+    ],
+    "globalUploadSettings": {
+      "format": "JSON"
+    }
+  }
+  
